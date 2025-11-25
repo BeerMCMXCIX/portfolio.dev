@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+/* จุดสีจางสำหรับพื้นหลังหลัก */
+.dot-grid-dim {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(255, 255, 255, 0.1) 1px,
+    transparent 0
+  );
+  background-size: 1rem 1rem;
+}
+
+/* จุดสว่างสำหรับเลเยอร์ที่ถูกมาสก์ */
+.dot-grid-bright {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(255, 255, 255, 0.7) 1px,
+    transparent 0
+  );
+  background-size: 1rem 1rem;
+}

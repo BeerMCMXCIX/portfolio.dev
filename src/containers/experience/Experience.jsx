@@ -1,0 +1,236 @@
+import { useMemo, useState } from "react";
+import {
+  FaGraduationCap,
+  FaBriefcase,
+  FaCalendarAlt,
+  FaLaptopCode,
+  FaWarehouse,
+  FaClipboardList,
+  FaBoxOpen,
+} from "react-icons/fa";
+
+// =====================
+// ข้อมูล (แก้ไขตรงนี้ได้เลย)
+// =====================
+const education = [
+  {
+    period: "2019",
+    title: "Vocational Certificate",
+    subtitle: "Business Computer",
+    org: "BANGKOK TECHNICAL OF BUSINESS ADMINISTRATION VOCATION COLLEGE",
+    description:
+      "Foundation in business computer systems, graphic design and basic programming concepts.",
+    icon: <FaGraduationCap />,
+    tone: "blue",
+  },
+  {
+    period: "2024",
+    title: "High Vocational Certificate",
+    subtitle: "Digital Business Technology",
+    org: "BANGKOK TECHNICAL OF BUSINESS ADMINISTRATION VOCATION COLLEGE",
+    description:
+      "Foundation in business computer systems, video editing, graphic design, coursework in networking, databases, and programming fundamentals.",
+    icon: <FaLaptopCode />,
+    tone: "indigo",
+  },
+  {
+    period: "Currently Studying",
+    title: "Currently Studying",
+    subtitle: "Digital Technology in Business",
+    org: "BANGKOK SUVARNABHUMI UNIVERSITY",
+    description:
+      "Bridging the gap between Business and Tech. Learning core programming, database management, web applications, and basic IoT technology.",
+    icon: <FaLaptopCode />,
+    tone: "green",
+  },
+];
+
+const work = [
+  {
+    period: "2022-2024",
+    title: "Service staff",
+    subtitle: "Customer Service",
+    org: "CP ALL PUBLIC COMPANY LIMITED",
+    description:
+      "Customer service, cashier operations, coffee preparation, product document verification, stock checking and ordering, shift closing with cash reconciliation and handover to next shift.",
+    icon: <FaBoxOpen />,
+    tone: "blue",
+  },
+  {
+    period: "2024",
+    title: "Store Assistant",
+    subtitle: "Warehouse & Stock Control",
+    org: "ROYAL THAI HERB COMPANY LIMITED",
+    description:
+      "Data entry, document filing and stock organization, inventory counting, quality checking upon receiving, and accurate product labeling.",
+    icon: <FaClipboardList />,
+    tone: "indigo",
+  },
+  {
+    period: "2024-2025",
+    title: "Data entry",
+    subtitle: "Business Data Management",
+    org: "RAT PREMIUM TRANSPORT LIMITED PARTNERSHIP",
+    description:
+      "Data entry, expense categorization, invoicing, document filing, income-expense summary, AppSheet for car repair reports, generating PDF receipts and sending automated emails (JavaScript).",
+    icon: <FaWarehouse />,
+    tone: "green",
+  },
+];
+
+// สีโทนสำหรับ badge (tailwind classes)
+const toneMap = {
+  blue: {
+    bg: "bg-blue-600/90",
+    ring: "ring-blue-400/40",
+  },
+  indigo: {
+    bg: "bg-indigo-600/90",
+    ring: "ring-indigo-400/40",
+  },
+  green: {
+    bg: "bg-green-600/90",
+    ring: "ring-green-400/40",
+  },
+};
+
+function Badge({ children, tone = "blue" }) {
+  const t = toneMap[tone] ?? toneMap.blue;
+  return (
+    <span
+      className={`${t.bg} text-white text-xs font-semibold inline-flex items-center gap-2 px-3 py-1 rounded-full`}
+    >
+      <FaCalendarAlt className="opacity-90" />
+      {children}
+    </span>
+  );
+}
+
+function TimelineDot({ icon, tone = "blue" }) {
+  const t = toneMap[tone] ?? toneMap.blue;
+  return (
+    <div
+      className={`w-12 h-12 rounded-full flex items-center justify-center ${t.bg} shadow-lg ring-8 ${t.ring}`}
+    >
+      <span className="text-white text-lg">{icon}</span>
+    </div>
+  );
+}
+
+function TimelineCard({ item, index, isLast }) {
+  // สลับซ้าย-ขวา (บนจอ lg ขึ้นไป)
+  const isLeft = index % 2 === 0;
+  return (
+    <div className="grid grid-cols-9 gap-6 items-center">
+      {/* ฝั่งซ้าย (การ์ด) */}
+      <div
+        className={`col-span-9 lg:col-span-4 ${
+          isLeft ? "lg:order-1" : "lg:order-3"
+        }`}
+      >
+        <div className="bg-white/5 backdrop-blur rounded-2xl p-5 shadow-xl border border-white/10">
+          <div className="mb-3">
+            <Badge tone={item.tone}>{item.period}</Badge>
+          </div>
+          <h3 className="text-white font-semibold text-lg">{item.title}</h3>
+          <p className="text-sky-300 text-sm mt-1">{item.subtitle}</p>
+          <p className="text-gray-300 text-sm mt-1">{item.org}</p>
+          <p className="text-gray-400 text-sm mt-3 leading-relaxed">
+            {item.description}
+          </p>
+        </div>
+      </div>
+
+      {/* จุด + แกนกลาง */}
+      <div className="col-span-9 lg:col-span-1 lg:order-2 flex lg:flex-col items-center justify-center">
+        <div className="relative flex items-center justify-center">
+          <div className="hidden lg:block absolute w-1 h-10 from-purple-500/40 via-purple-500/30 to-purple-500/10 rounded-full" />
+          <TimelineDot icon={item.icon} tone={item.tone} />
+          {!isLast && (
+            <div className="hidden lg:block absolute top-12 w-1 h-55 bg-gradient-to-b from-purple-500/10 via-purple-500/30 to-purple-500/40 rounded-full" />
+          )}
+        </div>
+      </div>
+
+      {/* ฝั่งขวา (เว้นที่ให้สลับ) */}
+      <div
+        className={`hidden lg:block lg:col-span-4 ${
+          isLeft ? "lg:order-3" : "lg:order-1"
+        }`}
+      />
+    </div>
+  );
+}
+
+export default function ExperienceSection() {
+  const [tab, setTab] = useState("education"); // 'education' | 'work'
+  const data = useMemo(() => (tab === "education" ? education : work), [tab]);
+
+  return (
+    <section
+      aria-labelledby="experience-heading"
+      className="container mx-auto text-white px-4 py-4"
+    >
+      {/* หัวข้อ + แท็บ */}
+      <div className="flex flex-col items-center gap-4">
+        <div className="inline-flex items-center gap-3 text-gray-300">
+          <span className="text-xl font-bold">Timeline</span>
+          <span className="text-gray-500">—</span>
+          <span className="text-gray-400">Noppol.dev</span>
+        </div>
+
+        <div
+          role="tablist"
+          aria-label="Experience tabs"
+          className="bg-white/5 border border-white/10 rounded-full p-1 flex items-center gap-1"
+        >
+          <button
+            role="tab"
+            aria-selected={tab === "education"}
+            onClick={() => setTab("education")}
+            className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
+              tab === "education"
+                ? "bg-white text-black shadow"
+                : "text-white hover:bg-white/10"
+            }`}
+          >
+            <span className="inline-flex items-center gap-2">
+              <FaGraduationCap /> Education
+            </span>
+          </button>
+          <button
+            role="tab"
+            aria-selected={tab === "work"}
+            onClick={() => setTab("work")}
+            className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
+              tab === "work"
+                ? "bg-white text-black shadow"
+                : "text-white hover:bg-white/10"
+            }`}
+          >
+            <span className="inline-flex items-center gap-2">
+              <FaBriefcase /> Work Experience
+            </span>
+          </button>
+        </div>
+      </div>
+
+      {/* เส้นกลางหน้าบนมือถือ */}
+      <div className="relative mt-10 lg:hidden">
+        <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-purple-500/40 via-purple-500/20 to-transparent" />
+      </div>
+
+      {/* ไทม์ไลน์ */}
+      <div className="mt-10 space-y-10 mx-auto md:mx-30">
+        {data.map((item, i, arr) => (
+          <TimelineCard
+            key={`${tab}-${i}`}
+            item={item}
+            index={i}
+            isLast={i === arr.length - 1} //ตัดเส้นสุดท้ายออก
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
