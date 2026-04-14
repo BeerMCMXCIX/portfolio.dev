@@ -10,7 +10,7 @@ import {
 } from "react-icons/fa";
 
 // =====================
-// ข้อมูล (แก้ไขตรงนี้ได้เลย)
+// ข้อมูล (แก้ไข)
 // =====================
 const education = [
   {
@@ -74,6 +74,16 @@ const work = [
     description:
       "Data entry, expense categorization, invoicing, document filing, income-expense summary, AppSheet for car repair reports, generating PDF receipts and sending automated emails (JavaScript).",
     icon: <FaWarehouse />,
+    tone: "blue",
+  },
+  {
+    period: "2025 - Currently",
+    title: "IT Outsource",
+    subtitle: "Retail Information Systems (RIS)",
+    org: "Maxnetic Core Co., Ltd. (Central Group Warehouse, Bang Phli)",
+    description:
+      "Providing comprehensive IT support for the Retail Information Systems team. Responsible for troubleshooting hardware and software issues, maintaining system operations, and ensuring smooth IT workflows within the warehouse environment.",
+    icon: <FaLaptopCode />,
     tone: "green",
   },
 ];
@@ -110,7 +120,7 @@ function TimelineDot({ icon, tone = "blue" }) {
   const t = toneMap[tone] ?? toneMap.blue;
   return (
     <div
-      className={`w-12 h-12 rounded-full flex items-center justify-center ${t.bg} shadow-lg ring-8 ${t.ring}`}
+      className={`w-12 h-12 rounded-full flex items-center justify-center ${t.bg} shadow-lg ring-8 ${t.ring} z-10 relative`}
     >
       <span className="text-white text-lg">{icon}</span>
     </div>
@@ -121,7 +131,8 @@ function TimelineCard({ item, index, isLast }) {
   // สลับซ้าย-ขวา (บนจอ lg ขึ้นไป)
   const isLeft = index % 2 === 0;
   return (
-    <div className="grid grid-cols-9 gap-6 items-center">
+    // 1. นำ items-center ออก เพื่อให้ Grid ยืดความสูงเท่ากัน และใส่ pb-12 เป็นระยะห่างแทน
+    <div className="grid grid-cols-9 gap-6 relative pb-12 lg:pb-16">
       {/* ฝั่งซ้าย (การ์ด) */}
       <div
         className={`col-span-9 lg:col-span-4 ${
@@ -142,12 +153,14 @@ function TimelineCard({ item, index, isLast }) {
       </div>
 
       {/* จุด + แกนกลาง */}
-      <div className="col-span-9 lg:col-span-1 lg:order-2 flex lg:flex-col items-center justify-center">
-        <div className="relative flex items-center justify-center">
-          <div className="hidden lg:block absolute w-1 h-10 from-purple-500/40 via-purple-500/30 to-purple-500/10 rounded-full" />
+      <div className="col-span-9 lg:col-span-1 lg:order-2">
+        <div className="relative flex flex-col items-center h-full w-full">
+          {/* จุดไอคอน */}
           <TimelineDot icon={item.icon} tone={item.tone} />
+          
+          {/* 3. ลากเส้นตั้งแต่ใต้ไอคอน (top-12) ไปจนสุดขอบล่างของแถว (bottom-0) */}
           {!isLast && (
-            <div className="hidden lg:block absolute top-12 w-1 h-55 bg-gradient-to-b from-purple-500/10 via-purple-500/30 to-purple-500/40 rounded-full" />
+            <div className="hidden lg:block absolute top-12 bottom-[-120px] w-1 bg-gradient-to-b from-purple-500/40 via-purple-500/20 to-transparent rounded-full" />
           )}
         </div>
       </div>
@@ -221,7 +234,7 @@ export default function ExperienceSection() {
       </div>
 
       {/* ไทม์ไลน์ */}
-      <div className="mt-10 space-y-10 mx-auto md:mx-30">
+      <div className="mt-10 mx-auto md:mx-30">
         {data.map((item, i, arr) => (
           <TimelineCard
             key={`${tab}-${i}`}

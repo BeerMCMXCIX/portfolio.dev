@@ -1,4 +1,5 @@
 import ReactTailwind from "../../assets/img/react-tailwindcss.png";
+import idomax from "../../assets/img/idomax-design.png"
 
 const projects = [
   {
@@ -8,6 +9,14 @@ const projects = [
     techs: ["React", "TailwindCSS"],
     gradient: "from-black-900 via-black-900/90 to-black-800/80", //from-สีเริ่มตั้น via-สีกลาง to-สีปลายทาง bg-gradient-to-r from-gray-700 via-gray-900 to-black
     url: "https://react-tailwind-css-phi.vercel.app/",
+  },
+  {
+    category: "Learning",
+    title: "Idomax Design",
+    image: idomax,
+    techs: ["Next,JS", "TailwindCSS"],
+    gradient: "from-black-900 via-black-900/90 to-black-800/80", //from-สีเริ่มตั้น via-สีกลาง to-สีปลายทาง bg-gradient-to-r from-gray-700 via-gray-900 to-black
+    url: "https://idomax-design.vercel.app/",
   },
 ];
 
