@@ -1,5 +1,6 @@
 import ReactTailwind from "../../assets/img/react-tailwindcss.png";
 import idomax from "../../assets/img/idomax-design.png"
+import brewerydev from "../../assets/img/brewerydev-web.png"
 
 const projects = [
   {
@@ -18,6 +19,14 @@ const projects = [
     gradient: "from-black-900 via-black-900/90 to-black-800/80", //from-สีเริ่มตั้น via-สีกลาง to-สีปลายทาง bg-gradient-to-r from-gray-700 via-gray-900 to-black
     url: "https://idomax-design.vercel.app/",
   },
+  {
+    category: "My website",
+    title: "brewerydev",
+    image: brewerydev,
+    techs: ["React", "TailwindCSS","Express","MongoDB"],
+    gradient: "from-black-900 via-black-900/90 to-black-800/80", //from-สีเริ่มตั้น via-สีกลาง to-สีปลายทาง bg-gradient-to-r from-gray-700 via-gray-900 to-black
+    url: "https://brewerydev.vercel.app/",
+  },
 ];
 
 // pill แสดง tech ด้านล่างการ์ด
@@ -34,9 +43,9 @@ function ProjectCard({ project }) {
   return (
     <article
       className={[
-        "relative flex h-full flex-col justify-between overflow-hidden",
+        "relative flex h-full flex-col overflow-hidden",
         "rounded-[32px] border border-white/10",
-        "bg-gradient-to-b", //การใช้ gradient-to- (b ไล่สีจาก บนลงล่าง) (r ซ้ายไปขวา) (l ขวาไปซ้าย) (tr ซ้ายล่างไปขวาบนเป็นต้น)
+        "bg-gradient-to-b", 
         project.gradient,
         "shadow-[0_40px_120px_rgba(0,0,0,0.7)]",
         "p-6 sm:p-7 lg:p-8",
@@ -47,18 +56,18 @@ function ProjectCard({ project }) {
       {/* เส้นขอบด้านในบาง ๆ */}
       <div className="pointer-events-none absolute inset-0 rounded-[32px] border border-white/5" />
 
-      {/* ส่วนหัว: หมวด + ชื่อโปรเจกต์ */}
-      <header className="relative z-10">
+      {/* 1. ส่วนหัว: หมวด + ชื่อโปรเจกต์ */}
+      <header className="relative z-10 shrink-0">
         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-gray-200/80">
           {project.category}
         </p>
-        <h3 className="mt-2 text-2xl sm:text-3xl font-extrabold tracking-tight text-white italic drop-shadow-lg">
+        <h3 className="mt-2 min-h-[4rem] text-2xl sm:text-3xl font-extrabold tracking-tight text-white italic drop-shadow-lg">
           {project.title}
         </h3>
       </header>
 
-      {/* รูป mockup กลางการ์ด */}
-      <div className="relative z-10 mt-6 flex flex-1 items-center justify-center">
+      {/* 2. รูป mockup กลางการ์ด */}
+      <div className="relative z-10 my-6 flex flex-1 items-center justify-center">
         <div className="w-full max-w-md">
           <div className="rounded-[28px] bg-black/40 p-3 sm:p-4 shadow-[0_30px_80px_rgba(0,0,0,0.9)]">
             <img
@@ -70,22 +79,28 @@ function ProjectCard({ project }) {
         </div>
       </div>
 
-      {/* แสดง tech เป็น pills ด้านล่าง */}
-      <footer className="relative z-10 mt-6 flex flex-wrap items-center gap-3">
-        {/* tech pills */}
-        <div className="flex flex-wrap gap-3">
+      {/* 3. แสดง tech เป็น pills ด้านล่าง */}
+      {/* เปลี่ยนจาก flex-wrap เป็น flex แถวเดียว พร้อมตรึงปุ่มไว้ด้านล่าง (items-end) */}
+      <footer className="relative z-10 mt-auto flex items-end justify-between gap-4">
+        
+        {/* Container สำหรับ Tech Pills: 
+            - flex-1: กินพื้นที่ฝั่งซ้ายผลักปุ่มไปขวา 
+            - min-h-[3.5rem]: จองความสูงเผื่อไว้ 2 บรรทัดเสมอ การ์ดจะได้สูงเท่ากัน 
+            - content-start: ถ้ามีแค่บรรทัดเดียว ให้ชิดขอบบนของพื้นที่ที่จองไว้ */}
+        <div className="flex flex-1 flex-wrap content-start gap-2 min-h-[3.5rem]">
           {project.techs.map((tech) => (
             <TechPill key={tech} label={tech} />
           ))}
         </div>
 
-        {/* ปุ่มไปเว็บโปรเจกต์ (ถ้ามี url) */}
+        {/* ปุ่มไปเว็บโปรเจกต์ */}
         {project.url && (
           <a
             href={project.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="ml-auto items-center rounded-full bg-white/90 px-4 py-1.5 text-xs md:text-sm font-semibold text-slate-900 shadow hover:bg-white"
+            // ใส่ shrink-0 ป้องกันไม่ให้ปุ่มโดนบีบจนเสียทรง
+            className="shrink-0 mb-1 rounded-full bg-white/90 px-4 py-1.5 text-xs md:text-sm font-semibold text-slate-900 shadow hover:bg-white"
           >
             Open link
           </a>
