@@ -1,6 +1,8 @@
 import ReactTailwind from "../../assets/img/react-tailwindcss.png";
 import idomax from "../../assets/img/idomax-design.png"
 import brewerydev from "../../assets/img/brewerydev-web.png"
+import luxride from "../../assets/img/luxride-elite.png"
+
 
 const projects = [
   {
@@ -20,12 +22,20 @@ const projects = [
     url: "https://idomax-design.vercel.app/",
   },
   {
-    category: "My website",
+    category: "My Project",
     title: "brewerydev",
     image: brewerydev,
     techs: ["React", "TailwindCSS","Express","MongoDB"],
     gradient: "from-black-900 via-black-900/90 to-black-800/80", //from-สีเริ่มตั้น via-สีกลาง to-สีปลายทาง bg-gradient-to-r from-gray-700 via-gray-900 to-black
     url: "https://brewerydev.vercel.app/",
+  },
+  {
+    category: "Learning",
+    title: "luxride-elite",
+    image: luxride,
+    techs: ["Next.JS", "TailwindCSS"],
+    gradient: "from-black-900 via-black-900/90 to-black-800/80", //from-สีเริ่มตั้น via-สีกลาง to-สีปลายทาง bg-gradient-to-r from-gray-700 via-gray-900 to-black
+    url: "https://luxride-elite.vercel.app/",
   },
 ];
 
