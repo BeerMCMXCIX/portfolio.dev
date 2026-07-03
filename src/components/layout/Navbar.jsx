@@ -66,7 +66,7 @@ export default function Navbar() {
       </div>
 
       {/* ===== Desktop: ใช้ navbar เดิม ===== */}
-      <nav className="fixed inset-x-0 top-8 z-10 hidden md:flex">
+      <nav className="fixed inset-x-0 top-8 z-50 hidden md:flex">
         <div
           className={`mx-auto flex items-center justify-between transition-all duration-300 px-4 
           ${
