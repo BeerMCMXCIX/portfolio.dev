@@ -71,7 +71,9 @@ function TechPill({
 
 export default function ResourceShowcase({
   // ---- ปรับได้ตามโปรเจกต์ของคุณ ----
-  resumeUrl = "", // ไฟล์เรซูเม่ ขอไปปรับในส่วน page/Home
+  resumeUrlEN = "", // ไฟล์เรซูเม่ (English) ขอไปปรับในส่วน page/Home
+  resumeUrlTH = "", // ไฟล์เรซูเม่ (Thai) ขอไปปรับในส่วน page/Home
+  resumeUrlOld = "", // ไฟล์เรซูเม่ (Old version)
   playlistUrl = "", // ลิงก์ Spotify แบบ embed ขอไปปรับในส่วน page/Home
 }) {
   // --- ไอคอนสำหรับ IconCloudCanvas (ยกมาจาก TechCloud3D ของคุณ) ---
@@ -109,7 +111,7 @@ export default function ResourceShowcase({
                 <div className="flex h-full flex-col justify-between">
                   <div>
                     <h3 className="text-2xl font-semibold text-white">
-                      Resume
+                      CV & Resume
                     </h3>
                     <p className="mt-2 text-sm text-gray-400">
                       A quick summary of my experience, and skills — available
@@ -117,14 +119,32 @@ export default function ResourceShowcase({
                     </p>
                   </div>
 
-                  <a
-                    href={resumeUrl}
-                    download
-                    className="mt-6 inline-flex items-center gap-2 text-sky-400 hover:text-sky-300"
-                  >
-                    <FaDownload />
-                    <span>(Click to download)</span>
-                  </a>
+                  <div className="mt-6 flex flex-col gap-3">
+                    <a
+                      href={resumeUrlEN}
+                      download="Professional_CV_EN.pdf"
+                      className="inline-flex items-center gap-2 text-sky-400 hover:text-sky-300 w-fit"
+                    >
+                      <FaDownload />
+                      <span>CV English Version</span>
+                    </a>
+                    <a
+                      href={resumeUrlTH}
+                      download="Professional_CV_TH.pdf"
+                      className="inline-flex items-center gap-2 text-sky-400 hover:text-sky-300 w-fit"
+                    >
+                      <FaDownload />
+                      <span>CV Thai Version</span>
+                    </a>
+                    <a
+                      href={resumeUrlOld}
+                      download="NoppolResume.pdf"
+                      className="inline-flex items-center gap-2 text-sky-400 hover:text-sky-300 w-fit"
+                    >
+                      <FaDownload />
+                      <span>Resume</span>
+                    </a>
+                  </div>
                 </div>
               </BaseCard>
 

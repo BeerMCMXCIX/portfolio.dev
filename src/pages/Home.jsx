@@ -5,7 +5,9 @@ import HeroSection from "../containers/home/Hero";
 import ScrollVelocity from "../components/ui/ScrollVelocity";
 import ResourceShowcase from "../containers/home/ResourceShowcase";
 import LogoLoopSection from "../containers/home/LogoLoopSection";
-import Resume from "../assets/pdf/NoppolResume.pdf";
+import ResumeEN from "../assets/pdf/Professional_CV.pdf";
+import ResumeTH from "../assets/pdf/Professional_CV_TH.pdf";
+import ResumeOld from "../assets/pdf/NoppolResume.pdf";
 
 export default function HomePage() {
   return (
@@ -19,7 +21,9 @@ export default function HomePage() {
           className="custom-scroll-text text-white"
         />
         <ResourceShowcase
-          resumeUrl={Resume}
+          resumeUrlEN={ResumeEN}
+          resumeUrlTH={ResumeTH}
+          resumeUrlOld={ResumeOld}
           playlistUrl="https://open.spotify.com/embed/playlist/5TSfenXxavLFApk28OsSV6?utm_source=generator&theme=0"
         />
         <LogoLoopSection />
