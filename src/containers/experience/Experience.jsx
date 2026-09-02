@@ -34,8 +34,8 @@ const education = [
     tone: "indigo",
   },
   {
-    period: "Currently Studying",
-    title: "Currently Studying",
+    period: "2026",
+    title: "Bachelor's degree",
     subtitle: "Digital Technology in Business",
     org: "BANGKOK SUVARNABHUMI UNIVERSITY",
     description:
@@ -77,18 +77,27 @@ const work = [
     tone: "blue",
   },
   {
-    period: "2025 - Currently",
+    period: "2025 - 2026",
     title: "IT Outsource",
     subtitle: "Retail Information Systems (RIS)",
     org: "Maxnetic Core Co., Ltd. (Central Group Warehouse, Bang Phli)",
     description:
       "Providing comprehensive IT support for the Retail Information Systems team. Responsible for troubleshooting hardware and software issues, maintaining system operations, and ensuring smooth IT workflows within the warehouse environment.",
     icon: <FaLaptopCode />,
+    tone: "indigo",
+  },
+  {
+    period: "2026 - Present",
+    title: "IT Support",
+    subtitle: "Technical Support & System Operations",
+    org: "THAI PARCELS PUBLIC COMPANY LIMITED",
+    description:
+      "Providing technical support for computer hardware and software installations. Managing and monitoring backend data transmission systems to ensure seamless, secure, and efficient information flow across organizational platforms.",
+    icon: <FaLaptopCode />,
     tone: "green",
   },
 ];
 
-// สีโทนสำหรับ badge (tailwind classes)
 const toneMap = {
   blue: {
     bg: "bg-blue-600/90",
@@ -135,9 +144,8 @@ function TimelineCard({ item, index, isLast }) {
     <div className="grid grid-cols-9 gap-6 relative pb-12 lg:pb-16">
       {/* ฝั่งซ้าย (การ์ด) */}
       <div
-        className={`col-span-9 lg:col-span-4 ${
-          isLeft ? "lg:order-1" : "lg:order-3"
-        }`}
+        className={`col-span-9 lg:col-span-4 ${isLeft ? "lg:order-1" : "lg:order-3"
+          }`}
       >
         <div className="bg-white/5 backdrop-blur rounded-2xl p-5 shadow-xl border border-white/10">
           <div className="mb-3">
@@ -157,7 +165,7 @@ function TimelineCard({ item, index, isLast }) {
         <div className="relative flex flex-col items-center h-full w-full">
           {/* จุดไอคอน */}
           <TimelineDot icon={item.icon} tone={item.tone} />
-          
+
           {/* 3. ลากเส้นตั้งแต่ใต้ไอคอน (top-12) ไปจนสุดขอบล่างของแถว (bottom-0) */}
           {!isLast && (
             <div className="hidden lg:block absolute top-12 bottom-[-120px] w-1 bg-gradient-to-b from-purple-500/40 via-purple-500/20 to-transparent rounded-full" />
@@ -167,9 +175,8 @@ function TimelineCard({ item, index, isLast }) {
 
       {/* ฝั่งขวา (เว้นที่ให้สลับ) */}
       <div
-        className={`hidden lg:block lg:col-span-4 ${
-          isLeft ? "lg:order-3" : "lg:order-1"
-        }`}
+        className={`hidden lg:block lg:col-span-4 ${isLeft ? "lg:order-3" : "lg:order-1"
+          }`}
       />
     </div>
   );
@@ -201,11 +208,10 @@ export default function ExperienceSection() {
             role="tab"
             aria-selected={tab === "education"}
             onClick={() => setTab("education")}
-            className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
-              tab === "education"
+            className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${tab === "education"
                 ? "bg-white text-black shadow"
                 : "text-white hover:bg-white/10"
-            }`}
+              }`}
           >
             <span className="inline-flex items-center gap-2">
               <FaGraduationCap /> Education
@@ -215,11 +221,10 @@ export default function ExperienceSection() {
             role="tab"
             aria-selected={tab === "work"}
             onClick={() => setTab("work")}
-            className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
-              tab === "work"
+            className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${tab === "work"
                 ? "bg-white text-black shadow"
                 : "text-white hover:bg-white/10"
-            }`}
+              }`}
           >
             <span className="inline-flex items-center gap-2">
               <FaBriefcase /> Work Experience
